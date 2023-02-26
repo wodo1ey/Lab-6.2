@@ -1,0 +1,48 @@
+//Игра в крестики-нолики для двух человек
+
+pole = [1, 2, 3,
+        4, 5, 6,
+        7, 8, 9]
+win = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]]
+
+
+def print_pole():
+    print(pole[0], pole[1], pole[2], sep=' ')
+    print(pole[3], pole[4], pole[5], sep=' ')
+    print(pole[6], pole[7], pole[8], sep=' ')
+
+
+def step_pole(number, sym):
+    ind = pole.index(number)
+    pole[ind] = sym
+
+
+def resultat():
+    win_sym = ""
+    for i in win:
+        if pole[i[0]] == "X" and pole[i[1]] == "X" and pole[i[2]] == "X":
+            win_sym = "X"
+        if pole[i[0]] == "O" and pole[i[1]] == "O" and pole[i[2]] == "O":
+            win_sym = "O"
+    return win_sym
+
+
+victory = False
+player = 0
+while victory == False:
+    print_pole()
+    if player % 2 == 0:
+        sym = "X"
+        number = int(input("Ход первого игрока: "))
+    else:
+        sym = "O"
+        number = int(input("Ход второго игрока: "))
+    step_pole(number, sym)
+    win_sym = resultat()
+    if win_sym != "":
+        victory = True
+    else:
+        victory = False
+    player += 1
+print_pole()
+print("Игрок, игравший за", win_sym, "победил!")
